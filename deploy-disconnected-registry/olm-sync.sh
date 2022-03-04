@@ -129,10 +129,10 @@ function mirror() {
 
     retry=1
     while [ ${retry} != 0 ]; do
-        echo "DEBUG: GODEBUG=x509ignoreCN=0 podman push --tls-verify=false ${OLM_DESTINATION_INDEX} --authfile ${PULL_SECRET}"
+        echo "DEBUG: GODEBUG=x509ignoreCN=0 podman push --storage-driver=vfs   --root=/var/tmp --tls-verify=false ${OLM_DESTINATION_INDEX} --authfile ${PULL_SECRET}"
 
         echo ">>> The following operation might take a while... storing in ${OUTPUTDIR}/mirror.log"
-        GODEBUG=x509ignoreCN=0 podman push --tls-verify=false ${OLM_DESTINATION_INDEX} --authfile ${PULL_SECRET} >>${OUTPUTDIR}/mirror.log 2>&1
+        GODEBUG=x509ignoreCN=0 podman push --storage-driver=vfs   --root=/var/tmp --tls-verify=false ${OLM_DESTINATION_INDEX} --authfile ${PULL_SECRET} >>${OUTPUTDIR}/mirror.log 2>&1
         SALIDA=$?
 
         if [ ${SALIDA} -eq 0 ]; then
